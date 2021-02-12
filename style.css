@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   color: var(--color-light--2);
   font-weight: 400;
   line-height: 1.6;
@@ -54,7 +54,12 @@ a:visited {
   align-self: center;
   margin-bottom: 4rem;
 }
-
+.heading {
+  font-size: 3rem;
+  align-self: center;
+  margin-bottom: 4rem;
+  color: var(--color-light--1);
+}
 .workouts {
   list-style: none;
   height: 77vh;

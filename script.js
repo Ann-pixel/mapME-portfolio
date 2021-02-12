@@ -62,9 +62,10 @@ class App {
   #workouts = [];
   constructor() {
     this._getPosition();
+    this._getLocalStorage();
     form.addEventListener("submit", this._newWorkout.bind(this));
     inputType.addEventListener("change", this._toggleElevationField);
-    containerWorkouts.addEventListener("click", this._moveToPopup);
+    containerWorkouts.addEventListener("click", this._moveToPopup.bind(this));
   }
   _getPosition() {
     if (navigator.geolocation) {
@@ -87,6 +88,7 @@ class App {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
     this.#map.on("click", this._showForm.bind(this));
+    this.#workouts.forEach((workout) => this._renderWorkoutMarker(workout));
   }
 
   _showForm(mapE) {
@@ -152,6 +154,8 @@ class App {
     this._renderWorkout(workout);
     //hide form and i/p fields
     this._hideForm();
+    //save new method to local storage
+    this._setLocalStorage();
   }
   _renderWorkoutMarker(workout) {
     L.marker(workout.coords)
@@ -217,9 +221,34 @@ class App {
   }
   _moveToPopup(evt) {
     const workoutEl = evt.target.closest(".workout");
-    console.log(workoutEl);
+    if (!workoutEl) return;
+    const clickedWorkout = this.#workouts.find(
+      (work) => work.id === workoutEl.dataset.id
+    );
+    this.#map.setView(clickedWorkout.coords, 13, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+  }
+  _setLocalStorage() {
+    localStorage.setItem("workouts", JSON.stringify(this.#workouts));
+  }
+  _getLocalStorage() {
+    const storedData = JSON.parse(localStorage.getItem("workouts"));
+    // console.log(storedData);
+
+    if (!storedData) return;
+    this.#workouts = storedData;
+    this.#workouts.forEach((workout) => this._renderWorkout(workout));
+  }
+  //a public method
+  reset() {
+    localStorage.removeItem("workouts");
+    location.reload();
   }
 }
 
 const app = new App();
-console.log(app);
+// console.log(app);
