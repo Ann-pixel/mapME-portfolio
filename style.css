@@ -22,16 +22,19 @@ html {
 @media only screen and (max-width: 600px) {
   html {
     font-size: 50%;
+    box-sizing: border-box;
   }
 }
 @media only screen and (max-width: 500px) {
   html {
     font-size: 40%;
+    box-sizing: border-box;
   }
 }
 @media only screen and (max-width: 400px) {
   html {
     font-size: 30%;
+    box-sizing: border-box;
   }
 }
 body {
@@ -41,10 +44,8 @@ body {
   line-height: 1.6;
   height: 100vh;
   overscroll-behavior-y: none;
-
   background-color: #fff;
   padding: 2.5rem;
-
   display: flex;
 }
 
@@ -62,11 +63,25 @@ a:visited {
   display: flex;
   flex-direction: column;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 750px) {
   .sidebar {
-    flex-basis: 30rem;
+    flex-basis: 40rem;
+    padding: 1rem 2rem 1.75rem 2rem;
   }
 }
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    flex-basis: 35rem;
+    padding: 1rem 2rem 1.75rem 2rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .sidebar {
+    flex-basis: 20rem;
+    padding: 0;
+  }
+}
+
 .logo {
   height: 5.2rem;
   align-self: center;
