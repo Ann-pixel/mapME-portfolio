@@ -19,7 +19,21 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
-
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  html {
+    font-size: 40%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 30%;
+  }
+}
 body {
   font-family: "Manrope", sans-serif;
   color: var(--color-light--2);
@@ -48,7 +62,11 @@ a:visited {
   display: flex;
   flex-direction: column;
 }
-
+@media only screen and (max-width: 500px) {
+  .sidebar {
+    flex-basis: 30rem;
+  }
+}
 .logo {
   height: 5.2rem;
   align-self: center;
